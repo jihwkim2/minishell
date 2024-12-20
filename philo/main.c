@@ -85,14 +85,19 @@ int	main(void)
 	int	i;
 
 	i = 0;
-	pthread_t *thread;
-	thread = malloc(sizeof (pthread_t));
+	struct s_philo *philo;
+	philo = malloc(sizeof(pthread_t) * philo->num_of_philo);
 
 	while (i < num_of_philos)
 	{
-		pthread_create(thread[i], asdfasdf);
+		pthread_create(philo->thread[i], NULL, routine, (void *)philo[i]);
+
 		i++;
 	}
+	i = 0;
+	while(i < philo->num_of_philos)
+	{
+		pthread_join
 
 	pthread_t	thread_1;
 	pthread_t	thread_2;
