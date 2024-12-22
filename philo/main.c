@@ -45,7 +45,7 @@ pthread_mutex_t	mutex_2 = PTHREAD_MUTEX_INITIALIZER;
 int	num = 0;
 
 // ./philo 4 310 100 100
-philos = 4; // 그룹 2개
+int philos = 4; // 그룹 2개
 
 // ./philo 5 310 100 100
 philos = 5; // 그룹 3개
@@ -86,7 +86,7 @@ int	main(void)
 
 	i = 0;
 	struct s_philo *philo;
-	philo = malloc(sizeof(pthread_t) * philo->num_of_philo);
+	philo = malloc(sizeof(pthread_t) * philo->num_of_philos);
 
 	while (i < num_of_philos)
 	{

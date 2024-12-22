@@ -5,17 +5,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <sys/time.h>
 
-struct s_prepare
-{
-	int people;
-};
+
 
 struct s_mutex
 {
 	pthread_mutex_t *fork;
 	pthread_mutex_t print;
-};
+}	t_mutex;
 
 struct s_philo
 {
@@ -28,8 +26,10 @@ struct s_philo
 	int number;
 	int left;
 	int right;
+	long current;
 	struct s_mutex *mutex;
-};
+	pthread_mutex_t *pub_mtx;
+}	t_philo; 
 
 int ft_isdigit(int num);
 int av_digitcheck(char *str);
