@@ -7,15 +7,20 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-
-
-struct s_mutex
+/*
+typedef struct current
+{
+	int current time;
+	int current day;
+}
+*/
+typedef struct s_mutex
 {
 	pthread_mutex_t *fork;
 	pthread_mutex_t print;
 }	t_mutex;
 
-struct s_philo
+typedef struct s_philo
 {
 	pthread_t thread;
 	int num_of_philos;
