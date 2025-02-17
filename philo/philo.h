@@ -18,6 +18,7 @@ typedef struct s_mutex
 {
 	pthread_mutex_t *fork;
 	pthread_mutex_t print;
+	pthread_mutex_t eat_lock
 }	t_mutex;
 
 typedef struct s_philo
