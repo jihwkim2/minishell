@@ -64,8 +64,13 @@ void *monitoring(t_philo *philo)
 	if(philo->must_eat == 0)
 		return (NULL);
 	stop_flag(philo, false);
-
-
+	while(kill_philo(philo) == true)
+	{
+		if (ft_enough_eat(philo) == true)
+			return (NULL);
+		usleep(1000);
+	}
+	return (NULL);
 }
 
 

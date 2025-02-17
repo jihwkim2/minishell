@@ -42,15 +42,16 @@ int main(int ac, char **av)
 	struct s_philo *philos;
 	struct s_mutex mu;
 	int i;
+	int	num_philos;
 
 	if (ac != 6 && ac != 5)
 		return (0);
 	if (av_digitaldetail(av) == 0)
 		return (0);
-	philos->num_of_philos = ft_atoi(av[1]);
-	philos = malloc(sizeof(struct s_philo) * philos->num_of_philos + 1);	
+	num_philos = ft_atoi(av[1]);
+	philos = malloc(sizeof(struct s_philo) * num_philos + 1);	
 	i = 0;
-	while(i < philos->num_of_philos)
+	while(i < num_philos)
 	{
 		philos[i].num_of_philos = ft_atoi(av[1]);
 		philos[i].time_to_die = ft_atoi(av[2]);
