@@ -63,27 +63,56 @@ void	put_msg(int flag, t_philo *philo)
 
 void mili_sleep(int time_to_sleep, t_philo *philo)
 {
+	philo->current_time = get_time(philo);
 	usleep(time_to_sleep * 1000);
+	if (philo->current_time - philo->last_meal >= philo->time_to_die)
+	{
+		put_msg(5, philo);
+		return ;
+	}
+
 }
+
+void ft_pickfork(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mutex->fork[philo->left]);	
+	put_msg(4, philo);
+	pthread_mutex_lock(&philo->mutex->fork[philo->right]);	
+	put_msg(4, philo);
+}
+
+void ft_musteat(t_philo *philo)
+{
+	put_msg(1, philo);
+	mili_sleep(philo->time_to_eat, philo);
+	philo->last_meal = get_time(philo);
+	pthread_mutex_unlock(&philo->mutex->fork[philo->left]);
+	pthread_mutex_unlock(&philo->mutex->fork[philo->right]);
+}
+
+void ft_sleep(t_philo *phil)
+{
+	
+		put_msg(2, phil);
+		mili_sleep(phil->time_to_sleep, phil);
+}
+
 // ./philo 2 210 100 50
 int ft_getfork(struct s_philo *phil)
 {
 	if (phil->number % 2 == 0)
-		mili_sleep(phil->time_of_eat - 10, phil);
-	pthread_mutex_lock(&phil->mutex->fork[phil->left]);	
-	put_msg(4, phil);
-	pthread_mutex_lock(&phil->mutex->fork[phil->right]);	
-	put_msg(4, phil);
-	put_msg(1, phil);
-	mili_sleep(phil->time_of_eat, phil);
-	pthread_mutex_unlock(&phil->mutex->fork[phil->left]);
-	pthread_mutex_unlock(&phil->mutex->fork[phil->right]);	
-	put_msg(2, phil);
-	mili_sleep(phil->time_of_sleep, phil);
-	put_msg(3, phil);
+		mili_sleep(phil->time_to_eat - 10, phil);
+	while(1)
+	{
+		//if (phil->current_time - phil->last_meal >= phil->time_to_die)
+		//	phil->torf = 1;
+		//return (phil->torf);
+		ft_pickfork(phil);
+		ft_musteat(phil);
+		ft_sleep(phil);
+	}
 
 //	put_msg(5, phil);
-
 //	phil->last_meal = gettime();
 //	philo-> meal_eat++;
 
@@ -112,6 +141,7 @@ int ft_pthreadcreate(struct s_philo *philo, int np)
 		pthread_create(&(philo[i].thread), NULL, routine, &philo[i]);
 		i++;
 	}
+	//pthread_create(&(philo[i].thread), NULL, monitoring, &philo[i]);
 	i = 0;
 	while(np > i)
 	{
@@ -119,5 +149,6 @@ int ft_pthreadcreate(struct s_philo *philo, int np)
 											   // main thread
 		i++;
 	}
+
 	return(0);
 }

@@ -24,12 +24,16 @@ typedef struct s_philo
 {
 	pthread_t thread;
 	int num_of_philos;
-	int time_of_sleep;
-	int time_of_eat;
-	int time_of_die;
+	int time_to_sleep;
+	int time_to_eat;
+	int torf;
+	int time_to_die;
+	int last_meal;
 	int must_eat;
+	int current_time;
 	int number;
 	int left;
+	int deathflag;
 	int right;
 	long current;
 	struct s_mutex *mutex;
