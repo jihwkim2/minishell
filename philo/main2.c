@@ -49,9 +49,9 @@ int main(int ac, char **av)
 	if (av_digitaldetail(av) == 0)
 		return (0);
 	num_philos = ft_atoi(av[1]);
-	philos = malloc(sizeof(struct s_philo) * num_philos + 1);	
+	philos = malloc(sizeof(struct s_philo) * (num_philos + 1));
 	i = 0;
-	while(i < num_philos)
+	while(i < num_philos + 1)
 	{
 		philos[i].num_of_philos = ft_atoi(av[1]);
 		philos[i].time_to_die = ft_atoi(av[2]);
@@ -62,23 +62,23 @@ int main(int ac, char **av)
 		i++;
 	}
 	i = 0;
-	mu.fork = malloc(sizeof(pthread_mutex_t) * philos->num_of_philos);
-	while(i < philos->num_of_philos)
+	mu.fork = malloc(sizeof(pthread_mutex_t) * num_philos);
+	while(i < num_philos)
 	{
 		pthread_mutex_init(&mu.fork[i], NULL);
 		i++;
 	}
 	pthread_mutex_init(&mu.print, NULL);
 	i = 0;
-	while (i < philos->num_of_philos)
+	while (i < num_philos)
 	{
 		philos[i].number = i + 1;
 		philos[i].left = i;
-		philos[i].right = (i + 1) % philos->num_of_philos;
+		philos[i].right = (i + 1) % num_philos;
 		philos[i].mutex = &mu;
 		i++;
 	}
-	//ft_pthreadcreate(philos, philos->num_of_philos );
+	ft_pthreadcreate(philos, num_philos);
 	
 
 	return (0);

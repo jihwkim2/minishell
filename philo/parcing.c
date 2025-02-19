@@ -1,4 +1,3 @@
-#include<stdio.h>
 #include "philo.h"
 
 
@@ -141,9 +140,9 @@ int ft_pthreadcreate(struct s_philo *philo, int np)
 		pthread_create(&(philo[i].thread), NULL, routine, &philo[i]);
 		i++;
 	}
-	//pthread_create(&(philo[i].thread), NULL, monitoring, &philo[i]);
+	pthread_create(&(philo[i].thread), NULL, monitoring, &philo[i]);
 	i = 0;
-	while(np > i)
+	while(np >= i)
 	{
 		pthread_join((philo[i]).thread, NULL); // thread를 기다림.
 											   // main thread
