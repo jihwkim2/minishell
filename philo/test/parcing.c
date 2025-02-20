@@ -100,7 +100,7 @@ void ft_sleep(t_philo *phil)
 // ./philo 2 210 100 50
 int ft_getfork(struct s_philo *phil)
 {
-	if (phil->number % 2 == 0)
+	if (phil->number % 2 != 0)
 		mili_sleep(phil->time_to_eat - 10, phil);
 	while(1)
 	{
@@ -149,6 +149,5 @@ int ft_pthreadcreate(struct s_philo *philo, int np)
 											   // main thread
 		i++;
 	}
-
 	return(0);
 }
