@@ -100,6 +100,7 @@ void ft_sleep(t_philo *phil)
 // ./philo 2 210 100 50
 int ft_getfork(struct s_philo *phil)
 {
+	printf("phil: %d\n", phil->number);
 	if (phil->number % 2 != 0)
 		mili_sleep(phil->time_to_eat - 10, phil);
 	while(1)
@@ -141,10 +142,13 @@ int ft_pthreadcreate(struct s_philo *philo, int np)
 		pthread_create(&(philo[i].thread), NULL, routine, &philo[i]);
 		i++;
 	}
-	//pthread_create(&(philo[i].thread), NULL, monitoring, &philo[i]);
+	printf("hi\n");
+	pthread_create(&(philo[i].thread), NULL, monitoring, &philo[i]);
+	printf("bye\n");
 	i = 0;
-	while(np > i)
+	while(np >= i)
 	{
+		printf("%d\n", i);
 		pthread_join((philo[i]).thread, NULL); // thread를 기다림.
 											   // main thread
 		i++;

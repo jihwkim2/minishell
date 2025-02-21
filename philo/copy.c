@@ -45,7 +45,8 @@ void ft_avtoint(int ac, char **av, int num_philos, t_philo *philos)
 	while (i < num_philos)
 	{
 		philos[i].num_of_philos = ft_atoi(av[1]);
-                philos[i].time_to_die = ft_atoi(av[2]);                                     philos[i].time_to_eat = ft_atoi(av[3]);
+                philos[i].time_to_die = ft_atoi(av[2]);
+				philos[i].time_to_eat = ft_atoi(av[3]);
                 philos[i].time_to_sleep = ft_atoi(av[4]);
                 if (ac == 6)
                         philos[i].must_eat = ft_atoi(av[5]);
